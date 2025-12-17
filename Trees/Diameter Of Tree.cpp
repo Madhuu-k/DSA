@@ -8,11 +8,22 @@ struct Tree {
     Tree(int val): x(val), left(nullptr), right(nullptr) {}
 };
 
-bool search(Tree* root, int val) {
-    if (root == nullptr) return false;
-    if (root -> x == val) return true;
+int diameter = 0;
 
-    return search(root -> left, val) || search(root -> right, val);
+int diameterOfTree(Tree* root) {
+    if (root == nullptr) return 0;
+
+    int leftH = diameterOfTree(root -> left);
+    int rightH = diameterOfTree(root -> right);
+
+    diameter = max(diameter, leftH + rightH);
+    return 1 + max(leftH, rightH);
+}
+
+int getDiameter(Tree* root) {
+    diameter = 0;
+    diameterOfTree(root);
+    return diameter;
 }
 
 int main() {
@@ -23,7 +34,6 @@ int main() {
     root -> right -> right = new Tree(5);
     root -> right -> right -> right = new Tree(6);
     root -> right -> right -> left = new Tree(7);
-    cout << "Search 5: " << (search(root, 5) ? "Present" : "Not Present")<< endl;
-    cout << "Search 9: " << (search(root, 9) ? "Present" : "Not Present")<< endl;
+    cout << "Diameter of Tree: " << getDiameter(root) << endl;
     return 0;
 }

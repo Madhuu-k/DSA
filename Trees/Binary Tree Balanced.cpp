@@ -8,11 +8,22 @@ struct Tree {
     Tree(int val): x(val), left(nullptr), right(nullptr) {}
 };
 
-bool search(Tree* root, int val) {
-    if (root == nullptr) return false;
-    if (root -> x == val) return true;
+int checkBalance(Tree* root) {
+    if (root == nullptr) return 0;
 
-    return search(root -> left, val) || search(root -> right, val);
+    int leftH = checkBalance(root -> left);
+    if (leftH == -1) return -1;
+
+    int rightH = checkBalance(root -> right);
+    if (rightH == -1) return -1;
+
+    if (abs(leftH - rightH) > 1) return -1;
+
+    return 1 + max(leftH, rightH);
+}
+
+bool isBalanced(Tree* root) {
+    return checkBalance(root) != -1;
 }
 
 int main() {
@@ -22,8 +33,6 @@ int main() {
     root -> left -> left = new Tree(4);
     root -> right -> right = new Tree(5);
     root -> right -> right -> right = new Tree(6);
-    root -> right -> right -> left = new Tree(7);
-    cout << "Search 5: " << (search(root, 5) ? "Present" : "Not Present")<< endl;
-    cout << "Search 9: " << (search(root, 9) ? "Present" : "Not Present")<< endl;
+    cout << isBalanced(root) << endl;
     return 0;
 }

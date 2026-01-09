@@ -5,20 +5,16 @@ using namespace std;
 
 int longestLenghtOfSubstring(string str) {
     vector<int> freq(256, 0);
-    int left = 0, best = 0;
-
-    for (int right = 0; right < str.size(); right++) {
-        freq[str[right]]++;
-
-        while (freq[str[right]] > 1) {
-            freq[str[left]]--;
-            left++;
+    int l = 0, maxLen = 0;
+    for (int r = 0; r < str.length(); r++) {
+        freq[str[r]]++;
+        while (freq[str[r]] > 1) {
+            freq[str[l]]--;
+            l++;
         }
-
-        best = max(best, right - left + 1);
+        maxLen = max(maxLen, r - l + 1);
     }
-
-    return best;
+    return maxLen;
 }
 
 int main() {

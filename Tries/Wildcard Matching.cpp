@@ -1,0 +1,29 @@
+#include<iostream>
+using namespace std;
+
+struct Trie {
+    Trie* children[26];
+    bool isEnd;
+    Trie() {
+        isEnd = false;
+        for (int i = 0; i < 26; i++) children[i] = nullptr;
+    }
+};
+
+bool dfs(Trie* node, string& word, int index) {
+    if (node == nullptr) return false;
+    if (index == word.size()) return node -> isEnd;
+    char ch = word[index];
+    if (ch == '.') {
+        for (int i = 0; i < 26; i++) {
+            if (node -> children[i] != nullptr) {
+                if (dfs(node -> children[i], word, index + 1)) return true;
+            }
+        }
+        return false;
+    }
+    else {
+        int idx = ch - 'a';
+        return dfs(node -> children[idx], word, index + 1);
+    }
+}

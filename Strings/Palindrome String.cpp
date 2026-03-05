@@ -1,17 +1,19 @@
 #include<iostream>
 using namespace std;
 
-int main() {
-    string s; cout << "Enter a string: "; cin >> s;
-    int l = 0, r = s.length() - 1;
-    bool isPalindrome = true;
-    while (l < r) {
-        if (s[l] != s[r]) {
-            isPalindrome = false;
-            break;
-        }
-        l++; r--;
+bool isPalindrome(string& str) {
+    if (str.length() == 0) return false;
+    int left = 0, right = str.length() - 1;
+    while (left < right) {
+        if (str[left] != str[right]) return false;
+        left++; right--;
     }
-    cout << (isPalindrome ? "Yes" : "No");
+    return true;
+}
+
+int main() {
+    string str;
+    cout << "Enter the first string: "; cin >> str;
+    cout << (isPalindrome(str) ? "Yes" : "No") << endl;
     return 0;
 }

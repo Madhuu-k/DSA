@@ -1,21 +1,26 @@
 #include<iostream>
-#include<vector>
 using namespace std;
 
-struct Tree {
-    int x;
-    Tree* left;
-    Tree* right;
-    Tree(int val): x(val), left(nullptr), right(nullptr) {}
+struct TreeNode {
+    int data;
+    TreeNode *left, *right;
+    TreeNode(int val): data(val), left(nullptr), right(nullptr) {}
 };
 
-int main() {
-    Tree* root = new Tree(1);
-    root -> left = new Tree(2);
-    root -> right = new Tree(3);
-    root -> left -> left = new Tree(4);
-    root -> right -> right = new Tree(5);
+TreeNode *insert(TreeNode* root, int val) {
+    if (root == nullptr) return new TreeNode(val);
+    if (val < root -> data) root -> left = insert(root -> left, val);
+    else root -> right = insert(root -> right, val);
+    return root;
+}
 
-    cout << "Tree Created Successfully!";
-    return 0;
+void inorder(TreeNode* root) {
+    if (root == nullptr) return;
+    inorder(root -> left);
+    cout << root -> data << " ";
+    inorder(root -> right);
+
+}
+
+int main() {
 }

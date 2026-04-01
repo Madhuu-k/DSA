@@ -18,13 +18,13 @@ Tree* insertBST(Tree* root, int val) {
 }
 
 bool searchBST(Tree* root, int val) {
-    if (root == nullptr) return false;
+    if (!root) return false;
 
-    if (val == root -> x) return true;
-    if (val < root -> x) return searchBST(root -> left, val);
+    if (root -> x == val) return true;
+
+    if (root -> x > val) return searchBST(root -> left, val);
     else return searchBST(root -> right, val);
 }
-
 int main() {
     Tree* root = new Tree(1);
     insertBST(root, 2);

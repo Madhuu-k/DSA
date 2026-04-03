@@ -1,10 +1,12 @@
 #include<iostream>
+#include<string>
+#include<ctype.h>
 using namespace std;
 
-bool isPalindrome(string& str) {
-    if (str.length() == 0) return false;
+bool isPlaindrome(string str) {
+    if (str.length() == 0) return true;
     int left = 0, right = str.length() - 1;
-    while (left < right) {
+    while (left <= right) {
         if (str[left] != str[right]) return false;
         left++; right--;
     }
@@ -12,8 +14,8 @@ bool isPalindrome(string& str) {
 }
 
 int main() {
-    string str;
-    cout << "Enter the first string: "; cin >> str;
-    cout << (isPalindrome(str) ? "Yes" : "No") << endl;
+    string str; cin >> str;
+    if (isPlaindrome(str)) cout << "The string " << str << "is a plaindrome";
+    else cout << "Not a palindrome";
     return 0;
 }

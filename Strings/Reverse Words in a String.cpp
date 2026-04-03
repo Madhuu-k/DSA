@@ -1,23 +1,26 @@
 #include<iostream>
+#include<algorithm>
+#include <sstream>
+#include<vector>
+#include<string>
 using namespace std;
 
 int main() {
-    string str; cout << "Enter the sentence: ";
-    getline(cin, str);
+    string s; getline(cin, s);
+    stringstream ss(s);
+    vector<string> words;
+    string word;
+
+    while (ss >> word) words.push_back(word);
+    reverse(words.begin(), words.end());
+
     string result = "";
-    int i = str.length() - 1;
-    cout << "Original String: " << str;
-    while (i >= 0) {
-        if (i >= 0 && str[i] == ' ') i--;
-        if (i < 0) break;
-        string word = "";
-        while (i >= 0 && str[i] != ' ') {
-            word = str[i] + word;
-            i--;
-        }
-        if (result.length() == 0) result = word;
-        else result = result + " " + word;
+    for (string w : words) {
+        result += w + " ";
     }
-    cout << "\nReversed: " << result << endl;
+
+    result.pop_back();
+
+    cout << result;
     return 0;
 }

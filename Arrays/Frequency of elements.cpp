@@ -3,12 +3,24 @@
 #include<unordered_map>
 using namespace std;
 
-int main() {
-    vector<int> arrr = {10, 30, 20, 72, 92, 92, 10};
+void freqMap(int arr[], int n) {
     unordered_map<int, int> freq;
-    for (int i = 0; i < arrr.size(); i++) freq[arrr[i]]++;
-    for (int i = 0; i < freq.size(); i++) {
-        if (freq[i] > 0) cout << i << " -> " << freq[i] << endl;
+    for (int i = 0; i < n; i++) {
+        freq[arr[i]]++;
     }
+    for (auto it : freq) {
+        cout << it.first << " -> " << it.second << endl;
+    }
+}
+
+int main() {
+    int n;
+    cin >> n;
+    int arr[n];
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+
+    freqMap(arr, n);
     return 0;
 }

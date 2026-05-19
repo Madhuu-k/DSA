@@ -18,14 +18,12 @@ int main() {
 
     vector<bool> visited(nodes, false);
     queue<int> q;
-    q.push(0);
-    visited[0] = true;
+    q.push(0); visited[0] = true;
 
     while (!q.empty()) {
         int node = q.front();
         q.pop();
         cout << node << " ";
-
         for (int neighbour : adj[node]) {
             if (!visited[neighbour]) {
                 visited[neighbour] = true;

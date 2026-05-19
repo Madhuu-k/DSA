@@ -5,7 +5,7 @@ using namespace std;
 void dfs(int node, vector<vector<int>>& adj, vector<bool>& visited) {
     visited[node] = true;
     cout << node << " ";
-    for (int neighbour : adj[node]) {
+    for (int neighbour : node) {
         if (!visited[neighbour]) dfs(neighbour, adj, visited);
     }
 }
@@ -24,6 +24,7 @@ int main() {
     }
 
     vector<bool> visited(nodes, false);
+
     dfs(0, adj, visited);
 
     return 0;

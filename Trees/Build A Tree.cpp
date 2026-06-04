@@ -2,25 +2,34 @@
 using namespace std;
 
 struct TreeNode {
-    int data;
+    int val;
     TreeNode *left, *right;
-    TreeNode(int val): data(val), left(nullptr), right(nullptr) {}
+    TreeNode(int x): val(x), left(nullptr), right(nullptr) {}
 };
 
-TreeNode *insert(TreeNode* root, int val) {
-    if (root == nullptr) return new TreeNode(val);
-    if (val < root -> data) root -> left = insert(root -> left, val);
-    else root -> right = insert(root -> right, val);
-    return root;
+TreeNode* insertNode(TreeNode* root, int data) {
+    if (!root) return new TreeNode(data);
+    if (root -> val > data) root -> right = insertNode(root -> right, data);
+    else root -> left = insertNode(root -> left, data);
 }
 
-void inorder(TreeNode* root) {
-    if (root == nullptr) return;
-    inorder(root -> left);
-    cout << root -> data << " ";
-    inorder(root -> right);
+// INORDER: LEFT -> ROOT -> RIGHT
+// PREORDER: ROOT -> LEFT -> RIGHT
+// POSTORDER: LEFT -> ROOT -> RIGHT
 
+int height(TreeNode* root) {
+    if (!root) return 0;
+    int left = height(root -> left);
+    int right = height(root -> right);
+    return 1 + max(left, right);
 }
 
-int main() {
+int maxDia = 0;
+int diameter(TreeNode* root) {
+    if (!root) return 0;
+    int left = height(root -> left);
+    int right = height(root -> right);
+    maxDia = max(maxDia, left + right);
+    return 1 + max(left, right);
 }
+

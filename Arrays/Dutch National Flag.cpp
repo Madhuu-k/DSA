@@ -3,21 +3,20 @@
 using namespace std;
 
 int main() {
-    vector<int> arr = {1, 0, 2, 2, 0, 1, 1, 0, 2};
-    int n = arr.size();
-    int low = 0, mid = 0, high = n - 1;
-    while (mid <= high) {
-        if (arr[mid] == 0) {
-            swap(arr[mid], arr[low]);
-            low++, mid++;
-        }
-        else if (arr[mid] == 1) mid++;
-        else {
-            swap(arr[mid], arr[high]);
-            high--;
-        }
+    vector<int> arr = {2, 0, 0, 1, 1, 2, 2, 2, 1, 0, 2, 2, 1, 0};
+    int c0 = 0, c1 = 0, c2 = 0;
+    for (int x : arr) {
+        if (x == 0) c0++;
+        else if (x == 1) c1++;
+        else c2++;
     }
-    cout << "Dutch National Flag" << endl;
-    for (int x : arr) cout << x << " ";
+
+    vector<int> res;
+    for (int i = 0; i < c0; i++) res.push_back(0);
+    for (int i = 0; i < c1; i++) res.push_back(1);
+    for (int i = 0; i < c2; i++) res.push_back(2);
+
+    for (int i = 0; i < res.size(); i++) cout << res[i] << " ";
+
     return 0;
 }

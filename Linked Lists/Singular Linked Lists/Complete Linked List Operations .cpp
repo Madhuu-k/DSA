@@ -106,12 +106,14 @@ ListNode* deleteAtPos(int pos) {
 ListNode* reverseList() {
     ListNode* prev = nullptr;
     ListNode* curr = start;
+
     while (curr != nullptr) {
         ListNode* nextNode = curr -> next;
         curr -> next = prev;
         prev = curr;
         curr =  nextNode;
     }
+
     start = prev;
     return start;
 }

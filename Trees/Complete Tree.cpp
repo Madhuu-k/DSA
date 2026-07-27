@@ -2,55 +2,60 @@
 #include<vector>
 using namespace std;
 
-struct TreeNode {
-    int node;
-    TreeNode *left, * right;
-    TreeNode(int val): node(val), left(nullptr), right(nullptr) {};
+struct Tree {
+    int val;
+    Tree *left, *right;
+    Tree(int x): val(x), left(nullptr), right(nullptr) {};
 };
 
-TreeNode* insertInTree(TreeNode* root, int val) {
-    if (!root) return new TreeNode(val);
-    if (val < root -> node) root -> left =  insertInTree(root -> left, val);
-    else root -> right = insertInTree(root -> right, val);
+Tree* root = nullptr;
+
+Tree* createTree(Tree* root, int val) {
+    if (!root) {
+        return new Tree(val);
+    }
+   if (val < root -> val) root -> left = createTree(root -> left, val);
+   else root -> right = createTree(root -> right, val);
 
     return root;
 }
 
-void preOrder(TreeNode* root) {
+void preOrder(Tree* root) {
     if (!root) return;
-    cout << root -> node << " ";
+    cout << root -> val << " ";
     preOrder(root -> left);
     preOrder(root -> right);
 }
 
-void inOrder(TreeNode* root) {
+void inOrder(Tree* root) {
     if (!root) return;
     inOrder(root -> left);
-    cout << root -> node << " ";
+    cout << root -> val << " ";
     inOrder(root -> right);
 }
 
-void postOrder(TreeNode* root) {
+void postOrder(Tree* root) {
     if (!root) return;
     postOrder(root -> left);
     postOrder(root -> right);
-    cout << root -> node << " ";
+    cout << root -> val << " ";
 }
 
 int main() {
-    TreeNode *root = nullptr;
-    int nodes; cout << "Enter number of nodes: ";
-    cin >> nodes;
-    for (int i = 0; i < nodes; i++) {
-        int val; cout << "Enter node " << i + 1 << ": "; cin >> val;
-        root = insertInTree(root, val);
-    }
-    inOrder(root);
-    cout << "\n===========================" << endl;
-    preOrder(root);
-    cout << "\n===========================" << endl;
-    postOrder(root);
-    cout << "\n===========================" << endl;
+    int n;
+    cin >> n;   // number of nodes
+    Tree* root = nullptr;
 
-    return 0;
+    for (int i = 0; i < n; i++) {
+        int val;
+        cin >> val;   // take input
+        root = createTree(root, val);
+    }
+
+    cout << "Preorder: ";
+    preOrder(root);
+    cout << "\nInorder: ";
+    inOrder(root);
+    cout << "\nPostorder: ";
+    postOrder(root);
 }
